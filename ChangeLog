@@ -1,3 +1,6 @@
+2.0.3
+- drop browser version
+- rely on client being passed in via the DynamoDBFactory
 2.0.2
 - support for delete attribute in transaction() update() and insert_or_update()
 - console.warn every time schema is not provided and a describeTable is called ( 3.x.x will throw err instead of calling describeTable )
