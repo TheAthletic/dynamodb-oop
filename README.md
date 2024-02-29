@@ -1,10 +1,10 @@
-### @TheAthletic/dynamodb
+### @theathletic/dynamodb
 
-##### @TheAthletic/dynamodb is a NodeJS library to access Amazon DynamoDB databases
+##### @theathletic/dynamodb is a NodeJS library to access Amazon DynamoDB databases
 
 ```
 
-	npm install @TheAthletic/dynamodb
+	npm install @theathletic/dynamodb
 
 ```
 
