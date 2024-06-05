@@ -1,6 +1,6 @@
 ### @theathletic/dynamodb
 
-##### @theathletic/dynamodb is a NodeJS library to access Amazon DynamoDB databases
+##### @theathletic/dynamodb is a NodeJS library to access Amazon DynamoDB databases, forked from @awspilot/dynamodb
 
 ```
 
