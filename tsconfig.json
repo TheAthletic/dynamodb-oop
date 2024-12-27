@@ -3,9 +3,6 @@
     "baseUrl": ".",
     "outDir": "./types",
     "allowJs": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "declarationMap": true
   },
   "include": ["lib/**/*"],
   "exclude": ["node_modules"]

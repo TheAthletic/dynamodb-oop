@@ -1,5 +1,5 @@
 {
-  "version": "2.0.9",
+  "version": "2.0.10",
   "contributors": [
     "Adrian Praja <adrian@databank.ro> (https://awspilot.dev)",
     "Mark Whelan <mark.whelan@theathletic.com> (https://theathletic.com)"
@@ -45,6 +45,7 @@
     "ifdef-loader": "^2.1.4"
   },
   "scripts": {
+    "typegen": "tsc --declaration --emitDeclarationOnly --declarationMap",
     "test": "mocha --timeout 300000 -S -R spec --exit"
   },
   "engines": {
