@@ -1,7 +1,7 @@
 export = DynamodbFactory;
 declare function DynamodbFactory(dynamoDbClient: any): DynamoDB;
 declare namespace DynamodbFactory {
-    export { util, config, createDynamoOopClient, DynamoDB as DynamoOopClient, Request, DynamoDB, TableSchema };
+    export { util, config, createDynamoOopClient, DynamoDB as DynamoOopClient, Request, TableSchema };
 }
 declare function DynamoDB($client: any): void;
 declare class DynamoDB {
