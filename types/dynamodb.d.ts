@@ -1,7 +1,7 @@
 export = DynamodbFactory;
 declare function DynamodbFactory(dynamoDbClient: any): DynamoDB;
 declare namespace DynamodbFactory {
-    export { util, config, createDynamoOopClient, DynamoDB as DynamoOopClient, Request };
+    export { util, config, createDynamoOopClient, DynamoDB as DynamoOopClient, Request, DynamoDB, TableSchema };
 }
 declare function DynamoDB($client: any): void;
 declare class DynamoDB {
@@ -26,9 +26,26 @@ declare class DynamoDB {
     L(data: any): any;
     list: any;
     add(data: any, datatype: any): any;
-    del(data: any, datatype: any, ...args: any[]): any;
+    /**
+     * @param {unknown} [data]
+     * @param {unknown} [datatype]
+     * @returns
+     */
+    del(data?: unknown, datatype?: unknown, ...args: any[]): any;
     addTableSchema($schema: any): void;
-    schema($schemas: any): this;
+    /**
+     * @typedef {{
+     *   TableName: string,
+     *   KeySchema: {
+     *     AttributeName: string,
+     *     KeyType: string,
+     *   }[]
+     * }} TableSchema
+     *
+     * @param {TableSchema | TableSchema[]} $schemas
+     * @returns {DynamoDB} this
+     */
+    schema($schemas: TableSchema | TableSchema[]): DynamoDB;
     explain(): this;
     table($tableName: any): Request;
     query(...args: any[]): any;
@@ -73,7 +90,7 @@ declare class Request {
     ExpressionAttributeNames: any;
     ExpressionAttributeValues: any;
     FilterExpression: any;
-    pendingKey: any;
+    pendingKey: string;
     pendingFilter: any;
     pendingIf: any;
     whereKey: {};
@@ -108,16 +125,67 @@ declare class Request {
     desc: any;
     index($IndexName: any): this;
     order_by: any;
-    where($key: any, $value1: any, $value2: any): this;
-    insert(item: any, callback: any): Promise<any>;
-    replace(item: any, callback: any): Promise<any>;
-    update($attrz: any, callback: any, $action: any): Promise<any>;
-    insert_or_update(params: any, callback: any, $action: any): Promise<any>;
-    insert_or_replace(item: any, callback: any): Promise<any>;
-    delete($attrz: any, callback: any, ...args: any[]): Promise<any>;
-    get(callback: any): Promise<any>;
-    query(callback: any): Promise<any> | this;
-    scan(callback: any): Promise<any>;
+    /**
+     * @param {string} $key
+     * @param {unknown} [$value1] value or operator
+     * @param {unknown} [$value2] value
+     * @returns {Request} this
+     */
+    where($key: string, $value1?: unknown, $value2?: unknown): Request;
+    /**
+     * @param {object} item
+     * @param {unknown} [callback]
+     * @returns {Promise}
+     */
+    insert(item: object, callback?: unknown): Promise<any>;
+    /**
+     * remember that replace should fail if item does not exist
+     * @param {object} item
+     * @param {unknown} [callback]
+     * @returns {Promise}
+     */
+    replace(item: object, callback?: unknown): Promise<any>;
+    /**
+     * @param {object} $attrz
+     * @param {unknown} [callback]
+     * @param {unknown} [$action]
+     * @returns {Promise}
+     */
+    update($attrz: object, callback?: unknown, $action?: unknown): Promise<any>;
+    /**
+     * @param {object} params
+     * @param {unknown} [callback]
+     * @param {unknown} [$action]
+     * @returns {Promise}
+     */
+    insert_or_update(params: object, callback?: unknown, $action?: unknown): Promise<any>;
+    /**
+     * @param {object} item
+     * @param {unknown} [callback]
+     * @returns {Promise}
+     */
+    insert_or_replace(item: object, callback?: unknown): Promise<any>;
+    /**
+     * @param {unknown} [$attrz]
+     * @param {unknown} [callback]
+     * @returns {Promise}
+     */
+    delete($attrz?: unknown, callback?: unknown, ...args: any[]): Promise<any>;
+    /**
+     * @param {unknown} [callback]
+     * @returns {Promise}
+     */
+    get(callback?: unknown): Promise<any>;
+    /**
+     * @param {unknown} [callback]
+     * @returns {Promise}
+     */
+    query(callback?: unknown): Promise<any>;
+    /**
+     * @param {unknown} [callback]
+     * @returns {Promise}
+     */
+    scan(callback?: unknown): Promise<any>;
     sql(sql: any, callback: any): any;
     resume(from: any): this;
     compare($comparison: any, $value: any, $value2: any): this;
@@ -125,7 +193,13 @@ declare class Request {
     having: any;
     if($key: any): this;
     limit($limit: any): this;
-    eq($value: any): this;
+    /**
+     * comparison functions
+     *
+     * @param {unknown} $value
+     * @returns {Request} this
+     */
+    eq($value: unknown): Request;
     le($value: any): this;
     lt($value: any): this;
     ge($value: any): this;
@@ -157,6 +231,13 @@ declare class Request {
     RawProjectionExpression(value: any): this;
     RawFilterExpression(value: any): this;
 }
+type TableSchema = {
+    TableName: string;
+    KeySchema: {
+        AttributeName: string;
+        KeyType: string;
+    }[];
+};
 import Batch = require("./batch");
 import Transact = require("./transact");
 //# sourceMappingURL=dynamodb.d.ts.map
