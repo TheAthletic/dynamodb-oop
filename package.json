@@ -45,7 +45,7 @@
     "ifdef-loader": "^2.1.4"
   },
   "scripts": {
-    "typegen": "tsc --declaration --emitDeclarationOnly --declarationMap",
+    "typegen": "tsc --declaration --emitDeclarationOnly --declarationMap --outDir=types",
     "test": "mocha --timeout 300000 -S -R spec --exit"
   },
   "engines": {
