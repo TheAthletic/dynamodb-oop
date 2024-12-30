@@ -26,11 +26,11 @@ declare class DynamoDB {
     L(data: any): any;
     list: any;
     /**
-     * @param {number | [] | Raw} data
+     * @param {number | [] | DynamoDB.Raw} data
      * @param {unknown} [datatype]
-     * @returns {Raw}
+     * @returns {DynamoDB.Raw}
      */
-    add(data: number | [] | Raw, datatype?: unknown): Raw;
+    add(data: number | [] | DynamoDB.Raw, datatype?: unknown): DynamoDB.Raw;
     /**
      * @param {unknown} [data]
      * @param {unknown} [datatype]
