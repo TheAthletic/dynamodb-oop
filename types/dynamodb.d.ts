@@ -25,7 +25,12 @@ declare class DynamoDB {
     numberSet: any;
     L(data: any): any;
     list: any;
-    add(data: any, datatype: any): any;
+    /**
+     * @param {number | [] | Raw} data
+     * @param {unknown} [datatype]
+     * @returns {Raw}
+     */
+    add(data: number | [] | Raw, datatype?: unknown): Raw;
     /**
      * @param {unknown} [data]
      * @param {unknown} [datatype]
